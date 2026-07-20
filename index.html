@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akila Theekshana — Data Science Undergraduate</title>
+<meta name="description" content="Portfolio of Akila Theekshana, Data Science undergraduate and social media marketing specialist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0e14;
+    --surface:#121822;
+    --surface-2:#1a2230;
+    --text:#e8edf4;
+    --muted:#8d9aac;
+    --accent:#4ee1a0;
+    --accent-2:#7c8fff;
+    --line:#222b38;
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.01em;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:0.02em;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"//";color:var(--muted);}
+  ::selection{background:var(--accent);color:#06110d;}
+  a:focus-visible, button:focus-visible, .chip:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(10px);
+    background:rgba(10,14,20,0.55);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s ease, background .3s ease;
+  }
+  header.scrolled{border-bottom-color:var(--line);background:rgba(10,14,20,0.85);}
+  nav{
+    max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:500;font-size:15px;color:var(--text);}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:28px;align-items:center;}
+  .nav-links a{font-size:14px;color:var(--muted);transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    font-family:'JetBrains Mono',monospace;font-size:13px;
+    padding:9px 16px;border:1px solid var(--accent);border-radius:8px;
+    color:var(--accent);transition:all .2s;
+  }
+  .nav-cta:hover{background:var(--accent);color:#06110d;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  #hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;align-items:center;
+    padding-top:90px;
+    overflow:hidden;
+  }
+  #hero-canvas{position:absolute;inset:0;z-index:0;opacity:0.55;}
+  .hero-grid{
+    position:relative;z-index:2;
+    width:100%;
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:56px;align-items:center;
+  }
+  .hero-title{font-size:clamp(38px,5.4vw,64px);line-height:1.06;margin-bottom:22px;}
+  .hero-title .grad{
+    background:linear-gradient(100deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-statement{color:var(--muted);font-size:17px;max-width:540px;margin-bottom:34px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;font-size:14px;
+    padding:13px 22px;border-radius:9px;display:inline-flex;align-items:center;gap:8px;
+    transition:all .2s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--accent);color:#06110d;font-weight:500;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(78,225,160,0.5);}
+  .btn-ghost{border-color:var(--line);color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent-2);color:var(--accent-2);}
+
+  .hero-photo-wrap{
+    position:relative;
+    justify-self:center;
+    width:100%;max-width:320px;
+  }
+  .hero-photo{
+    width:100%;aspect-ratio:1/1.05;object-fit:cover;
+    border-radius:20px;
+    border:1px solid var(--line);
+    filter:grayscale(15%);
+  }
+  .hero-photo-tag{
+    position:absolute;bottom:-16px;left:-16px;
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:10px;padding:10px 14px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);
+    box-shadow:0 12px 30px -10px rgba(0,0,0,0.6);
+  }
+  .hero-photo-tag b{color:var(--accent);font-weight:500;}
+
+  .scroll-cue{
+    position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:6px;z-index:2;
+  }
+  .scroll-cue .bar{width:1px;height:26px;background:linear-gradient(var(--muted),transparent);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:110px 0;position:relative;}
+  .section-head{margin-bottom:52px;max-width:640px;}
+  .section-head h2{font-size:clamp(28px,3.6vw,38px);}
+  #about{border-top:1px solid var(--line);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;}
+  .about-text p{color:var(--muted);font-size:16.5px;margin-bottom:18px;max-width:560px;}
+  .fact-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .fact-row{display:flex;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);font-size:14px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-row span:first-child{font-family:'JetBrains Mono',monospace;color:var(--muted);}
+  .fact-row span:last-child{color:var(--text);text-align:right;}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px;margin-bottom:20px;
+  }
+  .edu-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:8px;}
+  .edu-top h3{font-size:20px;}
+  .edu-period{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:4px 12px;white-space:nowrap;}
+  .edu-sub{color:var(--muted);font-size:14.5px;margin-bottom:18px;}
+  .grade-table{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+  .grade-item{
+    background:var(--surface-2);border:1px solid var(--line);border-radius:8px;
+    padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-size:13px;
+  }
+  .grade-item span:last-child{font-family:'JetBrains Mono',monospace;color:var(--accent);font-weight:500;}
+
+  /* ---------- SKILLS ---------- */
+  .skills-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .skills-col h3{font-size:14px;color:var(--muted);font-weight:500;margin-bottom:16px;font-family:'JetBrains Mono',monospace;text-transform:lowercase;}
+  .chip-group{display:flex;flex-wrap:wrap;gap:10px;}
+  .chip{
+    font-size:13.5px;padding:9px 14px;border-radius:8px;
+    background:var(--surface);border:1px solid var(--line);color:var(--text);
+  }
+  .skills-col.focus .chip{border-color:rgba(78,225,160,0.35);color:var(--accent);background:rgba(78,225,160,0.06);}
+
+  /* ---------- PROJECTS ---------- */
+  .project-card{
+    background:linear-gradient(160deg,var(--surface),var(--surface-2));
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:40px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:start;
+  }
+  .project-card .tag{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-2);
+    border:1px solid rgba(124,143,255,0.35);border-radius:999px;padding:4px 12px;display:inline-block;margin-bottom:16px;
+  }
+  .project-card h3{font-size:24px;margin-bottom:14px;}
+  .project-card p{color:var(--muted);max-width:600px;margin-bottom:22px;}
+  .project-stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .project-stack span{
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);
+    border:1px solid var(--line);border-radius:6px;padding:4px 10px;
+  }
+  .project-link{
+    align-self:center;
+    font-family:'JetBrains Mono',monospace;font-size:13.5px;
+    display:flex;align-items:center;gap:8px;color:var(--accent);white-space:nowrap;
+    border:1px solid var(--accent);border-radius:9px;padding:11px 18px;transition:all .2s;
+  }
+  .project-link:hover{background:var(--accent);color:#06110d;}
+  .more-projects-note{
+    margin-top:22px;color:var(--muted);font-size:13.5px;font-family:'JetBrains Mono',monospace;
+    border:1px dashed var(--line);border-radius:10px;padding:18px 22px;
+  }
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;}
+  .ach-card{
+    border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--surface);
+  }
+  .ach-card .icon{font-size:20px;margin-bottom:12px;display:block;}
+  .ach-card h4{font-size:15px;margin-bottom:6px;}
+  .ach-card p{font-size:13px;color:var(--muted);}
+
+  /* ---------- CONTACT ---------- */
+  #contact{border-top:1px solid var(--line);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+  .contact-title{font-size:clamp(28px,4vw,42px);margin-bottom:16px;}
+  .contact-sub{color:var(--muted);max-width:460px;margin-bottom:8px;}
+  .contact-links{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .contact-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 22px;border-bottom:1px solid var(--line);transition:background .2s;
+  }
+  .contact-row:last-child{border-bottom:none;}
+  .contact-row:hover{background:var(--surface);}
+  .contact-row .label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+  .contact-row .value{font-size:15px;margin-top:2px;}
+  .contact-row .arrow{color:var(--accent);font-family:'JetBrains Mono',monospace;}
+
+  footer{
+    border-top:1px solid var(--line);padding:32px 0;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+  }
+  footer p{font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace;}
+
+  /* ---------- CHATBOT ---------- */
+  #chat-toggle{
+    position:fixed;bottom:26px;right:26px;z-index:200;
+    width:58px;height:58px;border-radius:50%;
+    background:var(--accent);color:#06110d;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:24px;
+    box-shadow:0 10px 30px -8px rgba(78,225,160,0.6);
+    transition:transform .2s ease;
+  }
+  #chat-toggle:hover{transform:scale(1.06);}
+  #chat-panel{
+    position:fixed;bottom:96px;right:26px;z-index:200;
+    width:340px;max-width:calc(100vw - 40px);
+    height:440px;max-height:calc(100vh - 150px);
+    background:var(--surface);border:1px solid var(--line);border-radius:16px;
+    display:flex;flex-direction:column;overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.7);
+    opacity:0;transform:translateY(16px) scale(0.98);pointer-events:none;
+    transition:all .22s ease;
+  }
+  #chat-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+  .chat-head{
+    padding:16px 18px;border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:10px;background:var(--surface-2);
+  }
+  .chat-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(78,225,160,0.2);}
+  .chat-head h4{font-size:14px;}
+  .chat-head p{font-size:11.5px;color:var(--muted);}
+  .chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .msg{max-width:85%;font-size:13.5px;padding:10px 13px;border-radius:12px;line-height:1.5;}
+  .msg.bot{background:var(--surface-2);border:1px solid var(--line);align-self:flex-start;border-bottom-left-radius:3px;}
+  .msg.user{background:var(--accent);color:#06110d;align-self:flex-end;border-bottom-right-radius:3px;}
+  .chat-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;}
+  .sugg{
+    font-size:11.5px;font-family:'JetBrains Mono',monospace;color:var(--accent-2);
+    border:1px solid rgba(124,143,255,0.35);border-radius:999px;padding:5px 10px;cursor:pointer;background:none;
+  }
+  .sugg:hover{background:rgba(124,143,255,0.1);}
+  .chat-input-row{display:flex;border-top:1px solid var(--line);}
+  .chat-input-row input{
+    flex:1;background:none;border:none;color:var(--text);padding:14px 16px;font-size:13.5px;font-family:'Inter',sans-serif;
+  }
+  .chat-input-row input:focus{outline:none;}
+  .chat-input-row button{
+    background:none;border:none;color:var(--accent);padding:0 18px;cursor:pointer;font-size:16px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;text-align:left;}
+    .hero-photo-wrap{max-width:220px;order:-1;}
+    .about-grid,.skills-cols,.contact-grid{grid-template-columns:1fr;}
+    .project-card{grid-template-columns:1fr;}
+    .project-link{justify-self:start;}
+    .nav-links{
+      position:fixed;top:64px;right:0;left:0;background:var(--bg);
+      border-bottom:1px solid var(--line);
+      flex-direction:column;align-items:flex-start;padding:18px 28px;gap:16px;
+      transform:translateY(-130%);transition:transform .25s ease;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .nav-toggle{display:block;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .scroll-cue .bar{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <nav>
+    <a href="#hero" class="logo">akila<span>.</span>theekshana</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+      <a href="assets/Akila_Theekshana_CV.pdf" class="nav-cta" download>Resume ↓</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">undergraduate · data science</div>
+      <h1 class="hero-title">Turning raw data into<br class="hide-mobile"> <span class="grad">decisions worth acting on.</span></h1>
+      <p class="hero-statement">I'm an undergraduate at the Sri Lanka Technological Campus, reading for a BSc (Hons) in Data Science. Alongside that, I build data-driven social media strategies that help brands grow visibility, community, and measurable results.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="assets/Akila_Theekshana_CV.pdf" class="btn btn-ghost" download>Download CV</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="assets/profile.jpg" alt="Portrait of Akila Theekshana" class="hero-photo">
+      <div class="hero-photo-tag mono">status: <b>open to opportunities</b></div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>scroll</span><span class="bar"></span></div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <div class="eyebrow">about</div>
+      <h2 style="margin-bottom:20px;">Who I am</h2>
+      <p>I'm Akila Theekshana, a Data Science undergraduate at the Sri Lanka Technological Campus. I'm eager to immerse myself in challenging, multicultural academic environments where I can contribute through dedication, hard work, and a collaborative spirit.</p>
+      <p>Beyond the classroom, I create engaging content and data-informed social media strategies — planning campaigns end-to-end and turning audience data into strategies that expand reach and drive real participation.</p>
+    </div>
+    <div class="fact-list mono">
+      <div class="fact-row"><span>role</span><span>Data Science Undergraduate</span></div>
+      <div class="fact-row"><span>institution</span><span>Sri Lanka Technological Campus</span></div>
+      <div class="fact-row"><span>based in</span><span>Sri Lanka</span></div>
+      <div class="fact-row"><span>focus</span><span>Data Analysis · Social Media Strategy</span></div>
+      <div class="fact-row"><span>email</span><span>thikshanaakila@gmail.com</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">education</div>
+      <h2>Academic background</h2>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-top">
+        <h3>BSc (Hons) in Data Science</h3>
+        <span class="edu-period mono">In Progress</span>
+      </div>
+      <div class="edu-sub">Sri Lanka Technological Campus</div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-top">
+        <h3>G.C.E. Advanced Level</h3>
+        <span class="edu-period mono">Completed 2023 / 2024</span>
+      </div>
+      <div class="edu-sub">Technology Stream — Information & Communication Technology, Engineering Technology, Science for Technology</div>
+      <div class="grade-table">
+        <div class="grade-item"><span>ICT</span><span>B</span></div>
+        <div class="grade-item"><span>Engineering Technology</span><span>C</span></div>
+        <div class="grade-item"><span>Science for Technology</span><span>C</span></div>
+        <div class="grade-item"><span>General English</span><span>S</span></div>
+      </div>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-top">
+        <h3>G.C.E. Ordinary Level</h3>
+        <span class="edu-period mono">Completed 2020</span>
+      </div>
+      <div class="grade-table">
+        <div class="grade-item"><span>Mathematics</span><span>B</span></div>
+        <div class="grade-item"><span>Science</span><span>B</span></div>
+        <div class="grade-item"><span>English</span><span>B</span></div>
+        <div class="grade-item"><span>Information Technology</span><span>B</span></div>
+        <div class="grade-item"><span>Commerce</span><span>B</span></div>
+        <div class="grade-item"><span>Sinhala</span><span>B</span></div>
+        <div class="grade-item"><span>History</span><span>A</span></div>
+        <div class="grade-item"><span>Music</span><span>A</span></div>
+        <div class="grade-item"><span>Buddhism</span><span>C</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">skills</div>
+      <h2>What I bring to the table</h2>
+    </div>
+    <div class="skills-cols">
+      <div class="skills-col focus">
+        <h3>focus areas</h3>
+        <div class="chip-group">
+          <span class="chip">Data Analysis</span>
+          <span class="chip">Social Media Strategy</span>
+          <span class="chip">Content Creation</span>
+          <span class="chip">Campaign Planning</span>
+        </div>
+      </div>
+      <div class="skills-col">
+        <h3>professional skills</h3>
+        <div class="chip-group">
+          <span class="chip">Communication</span>
+          <span class="chip">Leadership</span>
+          <span class="chip">Problem-Solving</span>
+          <span class="chip">Adaptability</span>
+          <span class="chip">Multitasking</span>
+          <span class="chip">Attention to Detail</span>
+          <span class="chip">Time Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">projects</div>
+      <h2>Selected work</h2>
+    </div>
+    <div class="project-card">
+      <div>
+        <span class="tag">social media marketing</span>
+        <h3>Sanrawa 2.0 — Campaign</h3>
+        <p>Planned and executed the full social media marketing campaign for Sanrawa 2.0 — producing promotional content and running strategic initiatives across multiple platforms. The campaign lifted audience engagement, expanded online reach, and helped drive strong awareness and participation for the event.</p>
+        <div class="project-stack">
+          <span>Content Strategy</span>
+          <span>Campaign Planning</span>
+          <span>Multi-platform Marketing</span>
+          <span>Audience Engagement</span>
+        </div>
+      </div>
+      <a href="https://www.facebook.com/share/r/197ipBRRm5/" target="_blank" rel="noopener" class="project-link">View campaign ↗</a>
+    </div>
+    <div class="more-projects-note">// more projects — including data science coursework and applied analysis — are on the way. Check back soon, or ask the chat assistant.</div>
+  </div>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">achievements</div>
+      <h2>Milestones</h2>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card">
+        <span class="icon">🎓</span>
+        <h4>G.C.E. Advanced Level</h4>
+        <p>Successfully completed the Technology stream, 2023/2024.</p>
+      </div>
+      <div class="ach-card">
+        <span class="icon">📈</span>
+        <h4>Sanrawa 2.0 Campaign</h4>
+        <p>Delivered a full-scale social media campaign that grew reach and engagement.</p>
+      </div>
+      <div class="ach-card">
+        <span class="icon">🏅</span>
+        <h4>More on the way</h4>
+        <p>Certifications and awards will be added here as they're completed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <div class="eyebrow">contact</div>
+      <h2 class="contact-title">Let's build<br>something together.</h2>
+      <p class="contact-sub">Open to internships, collaborations, and data-driven marketing projects. Reach out any time.</p>
+    </div>
+    <div class="contact-links">
+      <a class="contact-row" href="mailto:thikshanaakila@gmail.com">
+        <div><div class="label mono">email</div><div class="value">thikshanaakila@gmail.com</div></div>
+        <span class="arrow">→</span>
+      </a>
+      <a class="contact-row" href="https://github.com/thikshanaakila-byte" target="_blank" rel="noopener">
+        <div><div class="label mono">github</div><div class="value">thikshanaakila-byte</div></div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="contact-row" href="https://www.linkedin.com/in/akila-theekshana-943b3b2a0/" target="_blank" rel="noopener">
+        <div><div class="label mono">linkedin</div><div class="value">akila-theekshana</div></div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="contact-row" href="assets/Akila_Theekshana_CV.pdf" download>
+        <div><div class="label mono">resume</div><div class="value">Download CV (PDF)</div></div>
+        <span class="arrow">↓</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="width:100%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <p>© 2026 Akila Theekshana. Built with data, deployed with care.</p>
+    <p>Colombo, Sri Lanka</p>
+  </div>
+</footer>
+
+<!-- ================= CHATBOT ================= -->
+<button id="chat-toggle" aria-label="Open chat assistant">💬</button>
+<div id="chat-panel" role="dialog" aria-label="Chat with Akila's assistant">
+  <div class="chat-head">
+    <span class="chat-dot"></span>
+    <div>
+      <h4>Ask about Akila</h4>
+      <p>Usually replies instantly</p>
+    </div>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="msg bot">Hi! I'm a quick assistant that can answer questions about Akila's education, projects, skills, or how to get in touch. What would you like to know?</div>
+  </div>
+  <div class="chat-suggestions">
+    <button class="sugg" data-q="education">Education</button>
+    <button class="sugg" data-q="projects">Projects</button>
+    <button class="sugg" data-q="skills">Skills</button>
+    <button class="sugg" data-q="contact">Contact</button>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="Type a question…" autocomplete="off">
+    <button id="chatSend" aria-label="Send">➤</button>
+  </div>
+</div>
+
+<script>
+/* ---------- header scroll state ---------- */
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+/* ---------- mobile nav ---------- */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* ---------- hero data-network canvas ---------- */
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w, h, nodes = [];
+  const hero = document.getElementById('hero');
+
+  function resize(){
+    w = canvas.width = hero.offsetWidth;
+    h = canvas.height = hero.offsetHeight;
+    const count = Math.min(70, Math.floor((w*h)/22000));
+    nodes = Array.from({length:count}, () => ({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx: (Math.random()-0.5)*0.25,
+      vy: (Math.random()-0.5)*0.25,
+      r: Math.random()*1.6+1
+    }));
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function step(){
+    ctx.clearRect(0,0,w,h);
+    for(const n of nodes){
+      if(!reduceMotion){
+        n.x += n.vx; n.y += n.vy;
+        if(n.x<0||n.x>w) n.vx*=-1;
+        if(n.y<0||n.y>h) n.vy*=-1;
+      }
+    }
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const a=nodes[i], b=nodes[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const dist=Math.sqrt(dx*dx+dy*dy);
+        if(dist<130){
+          ctx.strokeStyle = `rgba(78,225,160,${0.14*(1-dist/130)})`;
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+    for(const n of nodes){
+      ctx.fillStyle='rgba(124,143,255,0.55)';
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    if(!reduceMotion) requestAnimationFrame(step);
+  }
+  step();
+})();
+
+/* ---------- chatbot ---------- */
+(function(){
+  const toggle = document.getElementById('chat-toggle');
+  const panel = document.getElementById('chat-panel');
+  const body = document.getElementById('chatBody');
+  const input = document.getElementById('chatInput');
+  const send = document.getElementById('chatSend');
+
+  toggle.addEventListener('click', () => {
+    panel.classList.toggle('open');
+    if(panel.classList.contains('open')) input.focus();
+  });
+
+  const kb = [
+    { keys:['education','study','degree','university','school','qualif'],
+      a:"Akila is currently pursuing a BSc (Hons) in Data Science at the Sri Lanka Technological Campus. He completed his G.C.E. Advanced Level (Technology stream) in 2023/2024 and his Ordinary Level in 2020." },
+    { keys:['project','sanrawa','work','portfolio','campaign'],
+      a:"His featured project is the Sanrawa 2.0 social media marketing campaign — he planned and executed promotional content across multiple platforms, growing engagement and reach. Check the Projects section for the link." },
+    { keys:['skill','good at','strength','stack'],
+      a:"His focus areas are data analysis, social media strategy, content creation, and campaign planning — backed by strong communication, leadership, adaptability, and problem-solving skills." },
+    { keys:['contact','email','reach','hire','linkedin','github'],
+      a:"You can reach Akila at thikshanaakila@gmail.com, or find him on GitHub (thikshanaakila-byte) and LinkedIn (akila-theekshana). Links are in the Contact section." },
+    { keys:['cv','resume','download'],
+      a:"You can download his CV using the 'Resume' button in the navigation bar, or the Download CV button in the hero section." },
+    { keys:['who are you','what are you','bot'],
+      a:"I'm a simple built-in assistant for this portfolio — I can answer quick questions about Akila's education, projects, skills, and contact details." },
+    { keys:['achievement','award','certificat'],
+      a:"Akila successfully completed his G.C.E. Advanced Level (Technology stream) and delivered the Sanrawa 2.0 campaign. More certifications will be added as he completes them." },
+    { keys:['hi','hello','hey'],
+      a:"Hello! Ask me about Akila's education, projects, skills, or how to contact him." }
+  ];
+
+  function reply(text){
+    const t = text.toLowerCase();
+    const hit = kb.find(entry => entry.keys.some(k => t.includes(k)));
+    return hit ? hit.a : "I don't have a canned answer for that yet — feel free to email Akila directly at thikshanaakila@gmail.com, he'd be happy to help.";
+  }
+
+  function addMsg(text, cls){
+    const div = document.createElement('div');
+    div.className = 'msg ' + cls;
+    div.textContent = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function handleUser(text){
+    if(!text.trim()) return;
+    addMsg(text, 'user');
+    input.value='';
+    setTimeout(() => addMsg(reply(text), 'bot'), 350);
+  }
+
+  send.addEventListener('click', () => handleUser(input.value));
+  input.addEventListener('keydown', e => { if(e.key==='Enter') handleUser(input.value); });
+  document.querySelectorAll('.sugg').forEach(btn=>{
+    btn.addEventListener('click', () => handleUser(btn.dataset.q));
+  });
+})();
+</script>
+</body>
+</html>
